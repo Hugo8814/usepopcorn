@@ -18,6 +18,9 @@
 
 html {
   font-size: 62.5%;
+  overflow-y: hidden; /* Hide the default vertical scrollbar */
+  scrollbar-width: thin; /* Show a thin scrollbar */
+  scrollbar-color: transparent transparent;
 }
 
 body {
