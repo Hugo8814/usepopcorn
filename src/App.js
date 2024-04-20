@@ -58,7 +58,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const tempQuery = "fallout";
+  const [selectedId, setSelectedId] = useState("tt1375666");
 
   useEffect(
     function () {
