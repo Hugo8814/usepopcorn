@@ -127,10 +127,10 @@ export default function App() {
               selectedId={selectedId}
               onCloseMovie={handleCloseMovie}
               onAddWatched={handleAddWatched}
+              watched={watched}
             />
           ) : (
             <>
-              {" "}
               <WatchedSummary watched={watched} />
               <WatchedMovieList watched={watched} />
             </>
@@ -250,7 +250,7 @@ function Movie({ movie, onSelectMovie }) {
   );
 }
 
-function MovieDetails({ selectedId, onCloseMovie, onAddWatched }) {
+function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
@@ -277,7 +277,11 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched }) {
       runtime: Number(runtime.split(" ").at(0)),
       userRating: Number(userRating),
     };
+    if (watched.some((movie) => movie.imdbID === selectedId)) {
+      return;
+    }
     onAddWatched(newMovie);
+
     onCloseMovie();
   }
 
@@ -328,14 +332,19 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched }) {
               <StarRating
                 maxRating={10}
                 size="24"
+                defaultRating={
+                  watched.find((movie) => movie.imdbID === selectedId)
+                    ?.userRating || imdbRating
+                }
                 onSetRating={setUserRating}
               />
 
-              {userRating > 0 && (
-                <button className="btn-add" onClick={handleAdd}>
-                  + Add to list
-                </button>
-              )}
+              {userRating > 0 &&
+                (watched.some((movie) => movie.imdbID === selectedId) ? null : (
+                  <button className="btn-add" onClick={handleAdd}>
+                    + Add to list
+                  </button>
+                ))}
             </div>
 
             <p>
