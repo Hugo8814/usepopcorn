@@ -74,6 +74,8 @@ export default function App() {
           const data = await res.json();
           if (data.Response === "False") throw new Error(data.Error);
           setMovies(data.Search);
+
+          console.log(data.Search);
         } catch (err) {
           console.error(err.message);
           setError(err.message);
