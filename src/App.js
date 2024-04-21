@@ -246,6 +246,31 @@ function Movie({ movie, onSelectMovie }) {
 }
 
 function MovieDetails({ selectedId, onCloseMovie }) {
+  const [movie, setMovie] = useState({});
+  const {
+    Title: title,
+    Year: year,
+    Plot: plot,
+    Poster: poster,
+    runtime,
+    imdbRating,
+    Released: released,
+    Actors: actors,
+    Directors: directors,
+    Genre: genre,
+  } = movie;
+  console.log(title, year);
+
+  useEffect(function () {
+    async function fetchMovie() {
+      const res = await fetch(
+        `https://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
+      );
+      const data = await res.json();
+      setMovie(data);
+    }
+    fetchMovie();
+  }, []);
   return (
     <div className="details">
       <button className="btn-back" onClick={onCloseMovie}>
