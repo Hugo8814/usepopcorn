@@ -58,7 +58,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [selectedId, setSelectedId] = useState("tt1375666");
+  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(
     function () {
@@ -109,10 +109,15 @@ export default function App() {
         </Box>
 
         <Box>
-          <>
-            <WatchedSummary watched={watched} />
-            <WatchedMovieList watched={watched} />
-          </>
+          {selectedId ? (
+            <MovieDetails selectedId={selectedId} />
+          ) : (
+            <>
+              {" "}
+              <WatchedSummary watched={watched} />
+              <WatchedMovieList watched={watched} />
+            </>
+          )}
         </Box>
       </Main>
     </>
@@ -226,6 +231,10 @@ function Movie({ movie }) {
       </div>
     </li>
   );
+}
+
+function MovieDetails({ selectedId }) {
+  return <div className="details">{selectedId} </div>;
 }
 
 function WatchedSummary({ watched }) {
