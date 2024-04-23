@@ -11,7 +11,7 @@ export default function AppV2() {
   const [selectedId, setSelectedId] = useState(null);
 
   const { movies, isLoading, error, setMovies, setIsLoading, setError } =
-    useMovies(query);
+    useMovies(query, handleCloseMovie);
 
   // const [watched, setWatched] = useState([]);
   const [watched, setWatched] = useState(function () {
@@ -80,7 +80,7 @@ export default function AppV2() {
         controller.abort();
       };
     },
-    [query]
+    [query, setMovies, setIsLoading, setError]
   );
 
   return (
