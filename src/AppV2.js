@@ -11,7 +11,7 @@ export default function AppV2() {
   const [selectedId, setSelectedId] = useState(null);
 
   const { movies, isLoading, error, setMovies, setIsLoading, setError } =
-    useMovies(query, handleCloseMovie);
+    useMovies(query);
 
   // const [watched, setWatched] = useState([]);
   const [watched, setWatched] = useState(function () {
