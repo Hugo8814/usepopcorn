@@ -13,7 +13,7 @@ export default function AppV2() {
   const { movies, isLoading, error, setMovies, setIsLoading, setError } =
     useMovies(query);
 
-  const [watched, setWatched] = useLocalStorageState([]);
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   // const [watched, setWatched] = useState([]);
   // const [watched, setWatched] = useState(function () {
@@ -36,13 +36,6 @@ export default function AppV2() {
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
-
-  useEffect(
-    function () {
-      localStorage.setItem("watched", JSON.stringify(watched));
-    },
-    [watched]
-  );
 
   useEffect(
     function () {
