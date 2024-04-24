@@ -160,7 +160,7 @@ function SearchBar({ setQuery, query }) {
     inputEl.current.focus();
     setQuery("");
   });
-
+  ///done
   return (
     <>
       <input
